@@ -10,6 +10,9 @@ catch(e) {
 
 
 var noteTextarea = $('#note-textarea');
+var noteTextarea1 = $('#note-textarea1');
+var noteTextarea2 = $('#note-textarea2');
+var noteTextarea3 = $('#note-textarea3');
 var instructions = $('#recording-instructions');
 var notesList = $('ul#notes');
 
@@ -22,19 +25,19 @@ renderNotes(notes);
 
 
 /*-----------------------------
-      Voice Recognition 
+      Voice Recognition
 ------------------------------*/
 
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds),
-// allowing us to keep recording even when the user pauses. 
+// allowing us to keep recording even when the user pauses.
 recognition.continuous = true;
 
-// This block is called every time the Speech APi captures a line. 
+// This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far. 
+  // It holds all the lines we have captured so far.
   // We only need the current one.
   var current = event.resultIndex;
 
@@ -52,7 +55,7 @@ recognition.onresult = function(event) {
   }
 };
 
-recognition.onstart = function() { 
+recognition.onstart = function() {
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
 }
 
@@ -62,14 +65,34 @@ recognition.onspeechend = function() {
 
 recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
-    instructions.text('No speech was detected. Try again.');  
+    instructions.text('No speech was detected. Try again.');
   };
+}
+ -->
+if(!mobileRepeatBug) {
+  noteContent += transcript;
+  noteTextarea1.val(noteContent);
+}
+};
+
+recognition.onstart = function() {
+instructions.text('Voice recognition activated. Try speaking into the microphone.');
+}
+
+recognition.onspeechend = function() {
+instructions.text('You were quiet for a while so voice recognition turned itself off.');
+}
+
+recognition.onerror = function(event) {
+if(event.error == 'no-speech') {
+  instructions.text('No speech was detected. Try again.');
+};
 }
 
 
 
 /*-----------------------------
-      App buttons and input 
+      App buttons and input
 ------------------------------*/
 
 $('#start-record-btn').on('click', function(e) {
@@ -90,6 +113,11 @@ noteTextarea.on('input', function() {
   noteContent = $(this).val();
 })
 
+noteTextarea1.on('input', function() {
+  noteContent = $(this).val();
+})
+
+
 $('#save-note-btn').on('click', function(e) {
   recognition.stop();
 
@@ -107,7 +135,7 @@ $('#save-note-btn').on('click', function(e) {
     noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
-      
+
 })
 
 
@@ -123,7 +151,7 @@ notesList.on('click', function(e) {
 
   // Delete note.
   if(target.hasClass('delete-note')) {
-    var dateTime = target.siblings('.date').text();  
+    var dateTime = target.siblings('.date').text();
     deleteNote(dateTime);
     target.closest('.note').remove();
   }
@@ -132,7 +160,7 @@ notesList.on('click', function(e) {
 
 
 /*-----------------------------
-      Speech Synthesis 
+      Speech Synthesis
 ------------------------------*/
 
 function readOutLoud(message) {
@@ -143,14 +171,14 @@ function readOutLoud(message) {
 	speech.volume = 1;
 	speech.rate = 1;
 	speech.pitch = 1;
-  
+
 	window.speechSynthesis.speak(speech);
 }
 
 
 
 /*-----------------------------
-      Helper Functions 
+      Helper Functions
 ------------------------------*/
 
 function renderNotes(notes) {
@@ -164,7 +192,7 @@ function renderNotes(notes) {
           <a href="#" class="delete-note" title="Delete">Delete</a>
         </p>
         <p class="content">${note.content}</p>
-      </li>`;    
+      </li>`;
     });
   }
   else {
@@ -190,13 +218,12 @@ function getAllNotes() {
         date: key.replace('note-',''),
         content: localStorage.getItem(localStorage.key(i))
       });
-    } 
+    }
   }
   return notes;
 }
 
 
 function deleteNote(dateTime) {
-  localStorage.removeItem('note-' + dateTime); 
+  localStorage.removeItem('note-' + dateTime);
 }
-
