@@ -51,7 +51,7 @@ recognition.onresult = function(event) {
 
   if(!mobileRepeatBug) {
     noteContent += transcript;
-    noteTextarea.val(noteContent);
+    noteTextarea1.val(noteContent);
   }
 };
 
@@ -67,26 +67,6 @@ recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
     instructions.text('No speech was detected. Try again.');
   };
-}
- -->
-if(!mobileRepeatBug) {
-  noteContent += transcript;
-  noteTextarea1.val(noteContent);
-}
-};
-
-recognition.onstart = function() {
-instructions.text('Voice recognition activated. Try speaking into the microphone.');
-}
-
-recognition.onspeechend = function() {
-instructions.text('You were quiet for a while so voice recognition turned itself off.');
-}
-
-recognition.onerror = function(event) {
-if(event.error == 'no-speech') {
-  instructions.text('No speech was detected. Try again.');
-};
 }
 
 
@@ -109,14 +89,9 @@ $('#pause-record-btn').on('click', function(e) {
 });
 
 // Sync the text inside the text area with the noteContent variable.
-noteTextarea.on('input', function() {
-  noteContent = $(this).val();
-})
-
 noteTextarea1.on('input', function() {
   noteContent = $(this).val();
 })
-
 
 $('#save-note-btn').on('click', function(e) {
   recognition.stop();
@@ -132,7 +107,7 @@ $('#save-note-btn').on('click', function(e) {
     // Reset variables and update UI.
     noteContent = '';
     renderNotes(getAllNotes());
-    noteTextarea.val('');
+    noteTextarea1.val('');
     instructions.text('Note saved successfully.');
   }
 
