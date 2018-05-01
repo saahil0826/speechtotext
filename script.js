@@ -8,6 +8,8 @@ catch(e) {
   $('.app').hide();
 }
 
+
+var noteTextarea = $('#note-textarea');
 var noteTextarea1 = $('#note-textarea1');
 var noteTextarea2 = $('#note-textarea2');
 var noteTextarea3 = $('#note-textarea3');
@@ -49,7 +51,7 @@ recognition.onresult = function(event) {
 
   if(!mobileRepeatBug) {
     noteContent += transcript;
-    noteTextarea1.val(noteContent);
+    noteTextarea.val(noteContent);
   }
 };
 
@@ -87,7 +89,7 @@ $('#pause-record-btn').on('click', function(e) {
 });
 
 // Sync the text inside the text area with the noteContent variable.
-noteTextarea1.on('input', function() {
+noteTextarea.on('input', function() {
   noteContent = $(this).val();
 })
 
@@ -105,7 +107,7 @@ $('#save-note-btn').on('click', function(e) {
     // Reset variables and update UI.
     noteContent = '';
     renderNotes(getAllNotes());
-    noteTextarea1.val('');
+    noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
 
