@@ -8,8 +8,6 @@ catch(e) {
   $('.app').hide();
 }
 
-
-var noteTextarea = $('#note-textarea');
 var noteTextarea1 = $('#note-textarea1');
 var noteTextarea2 = $('#note-textarea2');
 var noteTextarea3 = $('#note-textarea3');
