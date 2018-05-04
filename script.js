@@ -110,6 +110,7 @@ $('#save-note-btn').on('click', function(e) {
     noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
+
 })
 
 
@@ -124,6 +125,12 @@ notesList.on('click', function(e) {
   }
 
   // Delete note.
+  if(target.hasClass('delete-note')) {
+    var dateTime = target.siblings('.date').text();
+    deleteNote(dateTime);
+    target.closest('.note').remove();
+  }
+});
 
 
 
