@@ -93,6 +93,24 @@ noteTextarea.on('input', function() {
   noteContent = $(this).val();
 })
 
+$('#save-note-btn').on('click', function(e) {
+  recognition.stop();
+
+  if(!noteContent.length) {
+    instructions.text('Could not save empty note. Please add a message to your note.');
+  }
+  else {
+    // Save note to localStorage.
+    // The key is the dateTime with seconds, the value is the content of the note.
+    saveNote(new Date().toLocaleString(), noteContent);
+
+    // Reset variables and update UI.
+    noteContent = '';
+    renderNotes(getAllNotes());
+    noteTextarea.val('');
+    instructions.text('Note saved successfully.');
+  }
+})
 
 
 notesList.on('click', function(e) {
