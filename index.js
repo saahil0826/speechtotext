@@ -9,10 +9,7 @@ catch(e) {
 }
 
 
-var noteTextarea1 = $('#note-textarea1');
-var noteTextarea2 = $('#note-textarea2');
-var noteTextarea3 = $('#note-textarea3');
-var noteTextarea4 = $('#note-textarea4');
+var noteTextarea = $('#note-textarea');
 var instructions = $('#recording-instructions');
 var notesList = $('ul#notes');
 
@@ -89,29 +86,9 @@ $('#pause-record-btn').on('click', function(e) {
 });
 
 // Sync the text inside the text area with the noteContent variable.
-if(document.activeElement.nodeName == 'noteTextarea1' || document.activeElement.nodeName == 'noteTextarea1'){
-	noteTextarea1.on('input', function() {
-    noteContent = $(this).val();
+noteTextarea.on('input', function() {
+  noteContent = $(this).val();
 })
-}
-
-if(document.activeElement.nodeName == 'noteTextarea2' || document.activeElement.nodeName == 'noteTextarea2'){
-	noteTextarea2.on('input', function() {
-    noteContent = $(this).val();
-})
-}
-
-if(document.activeElement.nodeName == 'noteTextarea3' || document.activeElement.nodeName == 'noteTextarea3'){
-	noteTextarea3.on('input', function() {
-    noteContent = $(this).val();
-})
-}
-
-if(document.activeElement.nodeName == 'noteTextarea4' || document.activeElement.nodeName == 'noteTextarea4'){
-	noteTextarea4.on('input', function() {
-    noteContent = $(this).val();
-})
-}
 
 $('#save-note-btn').on('click', function(e) {
   recognition.stop();
@@ -127,10 +104,7 @@ $('#save-note-btn').on('click', function(e) {
     // Reset variables and update UI.
     noteContent = '';
     renderNotes(getAllNotes());
-    noteTextarea1.val('');
-	noteTextarea2.val('');
-	noteTextarea3.val('');
-	noteTextarea4.val('');
+    noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
 
@@ -154,6 +128,7 @@ notesList.on('click', function(e) {
     target.closest('.note').remove();
   }
 });
+
 
 
 /*-----------------------------
