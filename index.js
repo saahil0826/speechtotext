@@ -9,8 +9,12 @@ catch(e) {
 }
 
 
-var noteTextarea = $('#note-textarea');
+var noteTextarea1 = $('#note-textarea1');
+var noteTextarea2 = $('#note-textarea2');
+var noteTextarea3 = $('#note-textarea3');
+var noteTextarea4 = $('#note-textarea4');
 var instructions = $('#recording-instructions');
+var index=1;
 var notesList = $('ul#notes');
 
 var noteContent = '';
@@ -86,9 +90,33 @@ $('#pause-record-btn').on('click', function(e) {
 });
 
 // Sync the text inside the text area with the noteContent variable.
-noteTextarea.on('input', function() {
-  noteContent = $(this).val();
+if(index==1){
+	noteTextarea1.on('input', function() {
+    noteContent = $(this).val();
+	index++;
 })
+}
+
+else if(index==2){
+	noteTextarea2.on('input', function() {
+    noteContent = $(this).val();
+	index++;
+})
+}
+
+else if(index==3){
+	noteTextarea3.on('input', function() {
+    noteContent = $(this).val();
+	index++;
+})
+}
+
+else{
+	noteTextarea4.on('input', function() {
+    noteContent = $(this).val();
+	index++;
+})
+}
 
 $('#save-note-btn').on('click', function(e) {
   recognition.stop();
@@ -104,7 +132,10 @@ $('#save-note-btn').on('click', function(e) {
     // Reset variables and update UI.
     noteContent = '';
     renderNotes(getAllNotes());
-    noteTextarea.val('');
+    noteTextarea1.val('');
+	noteTextarea2.val('');
+	noteTextarea3.val('');
+	noteTextarea4.val('');
     instructions.text('Note saved successfully.');
   }
 
@@ -128,7 +159,6 @@ notesList.on('click', function(e) {
     target.closest('.note').remove();
   }
 });
-
 
 
 /*-----------------------------
