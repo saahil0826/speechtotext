@@ -130,24 +130,6 @@ notesList.on('click', function(e) {
 });
 
 
-var index = 1;
-      function DisplayText(){
-          if(index==1){
-              document.getElementById("#note-textarea1").focus();
-              index++;
-          }
-          else if(index==2){
-              document.getElementById("#note-textarea2").focus();
-              index++;
-          }
-          else if(index==3){
-              document.getElementById("#note-textarea3").focus();
-              index++;
-          }
-          else{
-          document.getElementById("#note-textarea4").focus();
-          index-- ;}
-      }
 
 
 

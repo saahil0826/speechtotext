@@ -16,7 +16,7 @@ button:focus {
     margin: 0 auto;
     padding: 100px 50px;
     text-align: center;
-    border: 5px solid blue;
+    border: 5px solid red;
 }
 
 .container h1 {
