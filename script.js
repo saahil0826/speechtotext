@@ -22,19 +22,19 @@ renderNotes(notes);
 
 
 /*-----------------------------
-      Voice Recognition 
+      Voice Recognition
 ------------------------------*/
 
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds),
-// allowing us to keep recording even when the user pauses. 
+// allowing us to keep recording even when the user pauses.
 recognition.continuous = true;
 
-// This block is called every time the Speech APi captures a line. 
+// This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far. 
+  // It holds all the lines we have captured so far.
   // We only need the current one.
   var current = event.resultIndex;
 
@@ -52,7 +52,7 @@ recognition.onresult = function(event) {
   }
 };
 
-recognition.onstart = function() { 
+recognition.onstart = function() {
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
 }
 
@@ -62,14 +62,14 @@ recognition.onspeechend = function() {
 
 recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
-    instructions.text('No speech was detected. Try again.');  
+    instructions.text('No speech was detected. Try again.');
   };
 }
 
 
 
 /*-----------------------------
-      App buttons and input 
+      App buttons and input
 ------------------------------*/
 
 $('#start-record-btn').on('click', function(e) {
@@ -107,7 +107,7 @@ $('#save-note-btn').on('click', function(e) {
     noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
-      
+
 })
 
 
@@ -123,16 +123,36 @@ notesList.on('click', function(e) {
 
   // Delete note.
   if(target.hasClass('delete-note')) {
-    var dateTime = target.siblings('.date').text();  
+    var dateTime = target.siblings('.date').text();
     deleteNote(dateTime);
     target.closest('.note').remove();
   }
 });
 
 
+var index = 1;
+      function DisplayText(){
+          if(index==1){
+              document.getElementById("#note-textarea1").focus();
+              index++;
+          }
+          else if(index==2){
+              document.getElementById("#note-textarea2").focus();
+              index++;
+          }
+          else if(index==3){
+              document.getElementById("#note-textarea3").focus();
+              index++;
+          }
+          else{
+          document.getElementById("#note-textarea4").focus();
+          index-- ;}
+      }
+
+
 
 /*-----------------------------
-      Speech Synthesis 
+      Speech Synthesis
 ------------------------------*/
 
 function readOutLoud(message) {
@@ -143,14 +163,14 @@ function readOutLoud(message) {
 	speech.volume = 1;
 	speech.rate = 1;
 	speech.pitch = 1;
-  
+
 	window.speechSynthesis.speak(speech);
 }
 
 
 
 /*-----------------------------
-      Helper Functions 
+      Helper Functions
 ------------------------------*/
 
 function renderNotes(notes) {
@@ -164,7 +184,7 @@ function renderNotes(notes) {
           <a href="#" class="delete-note" title="Delete">Delete</a>
         </p>
         <p class="content">${note.content}</p>
-      </li>`;    
+      </li>`;
     });
   }
   else {
@@ -190,13 +210,12 @@ function getAllNotes() {
         date: key.replace('note-',''),
         content: localStorage.getItem(localStorage.key(i))
       });
-    } 
+    }
   }
   return notes;
 }
 
 
 function deleteNote(dateTime) {
-  localStorage.removeItem('note-' + dateTime); 
+  localStorage.removeItem('note-' + dateTime);
 }
-
