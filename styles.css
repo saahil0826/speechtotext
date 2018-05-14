@@ -9,7 +9,6 @@ p {
 
 button:focus {
     outline: 0;
-
 }
 
 .container {
@@ -17,8 +16,6 @@ button:focus {
     margin: 0 auto;
     padding: 100px 50px;
     text-align: center;
-     border: 5px solid blue;
-
 }
 
 .container h1 {
@@ -84,7 +81,7 @@ button:focus {
         margin-bottom: 10px;
     }
 
-}
+}   
 
 
 
