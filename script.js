@@ -20,14 +20,17 @@ var notes = getAllNotes();
 renderNotes(notes);
 
 $(document).on('click','#note-textarea',function(){
+  alert()
   noteTextarea=$(this);
 });
 
 $(document).on('click','#note-textarea1',function(){
+  alert()
   noteTextarea=$(this);
 });
 
 $(document).on('click','#note-textarea2',function(){
+  alert()
   noteTextarea=$(this);
 });
 note-textarea1
