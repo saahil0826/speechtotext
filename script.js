@@ -9,7 +9,7 @@ catch(e) {
 }
 
 
-var noteTextarea = $('#note-textarea');
+var noteTextarea = null;
 var instructions = $('#recording-instructions');
 var notesList = $('ul#notes');
 
@@ -19,6 +19,18 @@ var noteContent = '';
 var notes = getAllNotes();
 renderNotes(notes);
 
+$(document).on('click','#note-textarea',function(){
+  noteTextarea=$(this);
+});
+
+$(document).on('click','#note-textarea1',function(){
+  noteTextarea=$(this);
+});
+
+$(document).on('click','#note-textarea2',function(){
+  noteTextarea=$(this);
+});
+note-textarea1
 
 
 /*-----------------------------
